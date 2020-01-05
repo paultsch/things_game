@@ -1,0 +1,17 @@
+<h1>Home Page</h1>
+
+<h2>Welcome, admin or player</h2>
+
+<h3>Things</h3>
+<p>Description about the game</p>
+<h4>Admin</h4>
+<p>start button only available to admin to start a game. This button generates a game_code and sends admin to game lobby page with ?game_code=XXXX and sets admin's game_code to XXXX. This also displays the game code on the game lobby page.</p>
+<%= link_to "Start Game", game_lobby_path, class: "btn btn-success" %>
+<h4>Player</h4>
+<p>text input for user to input the game_code that was started by the admin and click enter lobby button - only available to player to start a game.</p>
+<%#= form_tag search_round_path, method: :get, id: "submission-round-form" do %>
+  <%#= text_field_tag :search_param, params[:search_param] %>
+  <%= button_tag "Join Game", class: "btn btn-success" %>
+<%# end %>
+<h3>Fish Bowl</h3>
+<p>Here would be another starting point if the admin wants to start a fish bowl game</p>
