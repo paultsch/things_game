@@ -1,3 +1,3 @@
 <h1>Guessing Round</h1>
 <p>This will for a form that displays submissions as tiles, but gives a check box for "guessed correctly", and a drop down menu that pulls names from players who are in the game. When the round is over, the admin clicks "next round" button which updates form/database and redirects screen to game lobby.</p>
-<%= link_to "Back to Lobby", game_lobby_path, class: "btn btn-success" %>
+<%= link_to "Back to Lobby", game_lobby_path(game_code: @game_code, round: @round), class: "btn btn-success" %>

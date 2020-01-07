@@ -1,10 +1,6 @@
 <h1>New submission</h1>
 
 <%= form_for @submission do |f| %>
-<div class="form-group">
-  <%= f.label :round %>
-  <%= f.text_field :round, class: 'form-control'  %>
-</div>
 
 <div class="form-group">
   <%= f.label :submission %>
@@ -15,7 +11,7 @@
   <%= f.submit class: 'btn btn-primary' %>
 </div>
 
-<%= link_to "Back to Lobby", game_lobby_path, class: 'btn btn-success' %>
+<%= link_to "Back to Lobby", game_lobby_path(game_code: @game_code, round: @round), class: 'btn btn-success' %>
 
 <% end %>
 

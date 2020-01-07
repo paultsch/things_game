@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200104221251) do
+ActiveRecord::Schema.define(version: 20200107030158) do
+
+  create_table "codes", force: :cascade do |t|
+    t.string "gamecodes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "gamecodes", force: :cascade do |t|
+    t.string "codes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "submissions", force: :cascade do |t|
     t.integer "round"
@@ -20,6 +32,7 @@ ActiveRecord::Schema.define(version: 20200104221251) do
     t.boolean "guessed_correctly"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "code"
     t.index ["user_id"], name: "index_submissions_on_user_id"
   end
 
