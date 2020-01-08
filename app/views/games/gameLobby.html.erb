@@ -24,15 +24,19 @@
   </tbody>
 </table>
 
-<h3>Admin</h3>
-<p>For now, players will grab a card from the table to figure out what everyone is writing about.  But eventually, we make this button say "Pick a Thing", which randomly selects a thing from the things table and displays it.  Could then also make a submission on this page for the player to submit the thing id and then the thing would display on the submissions page.</p>
+<% if current_user.admin? %>
+  <h3>Admin</h3>
+  <p>For now, players will grab a card from the table to figure out what everyone is writing about.  But eventually, we make this button say "Pick a Thing", which randomly selects a thing from the things table and displays it.  Could then also make a submission on this page for the player to submit the thing id and then the thing would display on the submissions page.</p>
 
-<p>After everyone has made their submission, the admin will click "guessing round" and this will show all the submissions.</p>
+  <p>After everyone has made their submission, the admin will click "guessing round" and this will show all the submissions.</p>
 
-<%= link_to "Guessing Round", guessing_round_path(game_code: @game_code, round: @round), class: "btn btn-success" %>
+  <%= link_to "Guessing Round", guessing_round_path(game_code: @game_code, round: @round), class: "btn btn-success" %>
+<% end %>
 
-<h3>Player</h3>
+<% if current_user.player? %>
+  <h3>Player</h3>
 
-<p>Need to figure out how to handle rounds.  Maybe just have a variable that goes from page to page and increases everytime the admin/player goes back to the lobby and pass the round through the url with params. Also need to pass the game_code to the form.</p>
+  <p>Need to figure out how to handle rounds.  Maybe just have a variable that goes from page to page and increases everytime the admin/player goes back to the lobby and pass the round through the url with params. Also need to pass the game_code to the form.</p>
 
-<%= link_to "Submit your Things", new_submission_path(game_code: @game_code, round: @round), class: "btn btn-success" %>
+  <%= link_to "Submit your Things", new_submission_path(game_code: @game_code, round: @round), class: "btn btn-success" %>
+<% end %>

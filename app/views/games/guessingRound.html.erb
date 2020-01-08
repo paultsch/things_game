@@ -6,7 +6,12 @@
         <div class="well col-md-4">
           <p><%= submission.submission %></p>
           <input type="checkbox">Done
-          <input type="text">
+          <select>
+            <option></option>
+            <% @users.each do |user| %>
+              <option><%= user.username %></option>
+            <% end %>
+          </select>
         </div>
     <% end %>
   </div>
