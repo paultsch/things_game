@@ -1,3 +1,15 @@
 <h1>Guessing Round</h1>
 <p>This will for a form that displays submissions as tiles, but gives a check box for "guessed correctly", and a drop down menu that pulls names from players who are in the game. When the round is over, the admin clicks "next round" button which updates form/database and redirects screen to game lobby.</p>
+<div id="round-search-results">
+  <div class="row">
+    <% @submissions.each do |submission| %>
+        <div class="well col-md-4">
+          <p><%= submission.submission %></p>
+          <input type="checkbox">Done
+          <input type="text">
+        </div>
+    <% end %>
+  </div>
+</div>
+
 <%= link_to "Back to Lobby", game_lobby_path(game_code: @game_code, round: @round), class: "btn btn-success" %>

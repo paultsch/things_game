@@ -13,6 +13,7 @@ class GamesController < ApplicationController
   def guessingRound
     @game_code = params[:game_code]
     @round = params[:round]
+    @submissions = Submission.where(code: @game_code, round: @round)
   end
 
   def updateRound

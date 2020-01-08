@@ -22,6 +22,8 @@ class SubmissionsController < ApplicationController
 
   end
 
+  
+
   private
 
   def submission_params

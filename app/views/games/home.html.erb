@@ -9,9 +9,9 @@
 <%= link_to "Start Game", codes_path, class: "btn btn-success", method: :post %>
 <h4>Player</h4>
 <p>text input for user to input the game_code that was started by the admin and click enter lobby button - only available to player to start a game.</p>
-<%#= form_tag search_round_path, method: :get, id: "submission-round-form" do %>
-  <%#= text_field_tag :search_param, params[:search_param] %>
+<%= form_tag game_lobby_path, method: :get do %>
+  <%= text_field_tag :game_code, params[:game_code] %>
   <%= button_tag "Join Game", class: "btn btn-success" %>
-<%# end %>
+<% end %>
 <h3>Fish Bowl</h3>
 <p>Here would be another starting point if the admin wants to start a fish bowl game</p>
