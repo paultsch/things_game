@@ -38,5 +38,5 @@
 
   <p>Need to figure out how to handle rounds.  Maybe just have a variable that goes from page to page and increases everytime the admin/player goes back to the lobby and pass the round through the url with params. Also need to pass the game_code to the form.</p>
 
-  <%#= link_to "Submit your Things", new_submission_path(game_code: @game_code, round: @round), class: "btn btn-success" %>
+  <%= link_to "Submit your Things", new_submission_path(game_code: @game_code, round: @round), class: "btn btn-success" %>
 <% end %>
