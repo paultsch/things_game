@@ -6,5 +6,6 @@ Rails.application.routes.draw do
   get 'game-lobby', to: 'games#gameLobby'
   get 'guessing-round', to: 'games#guessingRound'
   resources :codes, only: [:create]
+  resources :code_users, only: [:create]
 
 end

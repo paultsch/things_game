@@ -6,4 +6,7 @@ class User < ApplicationRecord
 
   has_many :submissions
 
+  has_many :code_users
+  has_many :codes, through: :code_users
+
 end
