@@ -14,11 +14,6 @@
 <% if current_user.player? %>
   <h4>Player</h4>
   <p>text input for user to input the game_code that was started by the admin and click enter lobby button - only available to player to start a game.</p>
-  <%#= form_tag game_lobby_path, method: :get do %>
-    <%#= text_field_tag :game_code, params[:game_code] %>
-    <%#= button_tag "Join Game", class: "btn btn-success" %>
-  <%# end %>
-
 
   <%= form_tag code_users_path, method: :post do %>
     <div class="form-group">

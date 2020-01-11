@@ -21,6 +21,13 @@ class CodesController < ApplicationController
     (0...size).map{ charset.to_a[rand(charset.size)] }.join
   end
 
+  def destroy_all
+    @game_code = params[:game_code]
+    Submission.where(code: @game_code).destroy_all
+    flash[:success] = "Code #{@game_code} has ended."
+    redirect_to root_path
+  end
+
 private
 
   def code_params

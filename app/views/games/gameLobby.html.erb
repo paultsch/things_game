@@ -1,13 +1,25 @@
-<h1>Game Lobby</h1>
-<h2>Game Code: <%= @game_code %></h2>
+<div class="row">
+  <div class="col-md-6">
+    <h1>Game Lobby</h1>
+    <h2>Game Code: <%= @game_code %></h2>
+    <h3>Just Finished Round: <%= params[:round] %>
+    <h3>Next Round: <%= @round %> </h3>
+    <h3>Current User: <%= current_user.username %></h3>
+  </div>
+  <div class="col-md-6">
+    <% if current_user.player? %>
+      <%= link_to "Submit your Things", new_submission_path(game_code: @game_code, round: @round), class: "btn btn-success btn-lg vcenter" %>
+    <% end %>
+  </div>
+</div>
 
-<h3>Users</h3>
+<h3>Players</h3>
 <p>Here is a user's table that displays all of the users and their current order, but also gives the admin the option to reorder the users field. This after this form submits, it redirects back to this game page. This page will also handle scoring. </p>
 
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Users</th>
+      <th>Player</th>
       <th>Score</th>
       <th>Order</th>
     </tr>
@@ -31,12 +43,11 @@
   <p>After everyone has made their submission, the admin will click "guessing round" and this will show all the submissions.</p>
 
   <%= link_to "Guessing Round", guessing_round_path(game_code: @game_code, round: @round), class: "btn btn-success" %>
+  <%= link_to "End Game", end_game_path(game_code: @game_code), class: "btn btn-danger", method: :delete %>
 <% end %>
 
 <% if current_user.player? %>
   <h3>Player</h3>
-
-  <p>Need to figure out how to handle rounds.  Maybe just have a variable that goes from page to page and increases everytime the admin/player goes back to the lobby and pass the round through the url with params. Also need to pass the game_code to the form.</p>
 
   <%= link_to "Submit your Things", new_submission_path(game_code: @game_code, round: @round), class: "btn btn-success" %>
 <% end %>

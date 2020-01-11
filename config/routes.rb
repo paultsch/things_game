@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   resources :submissions, path: "submissions/:game_code/:round", only: [:new, :create]
   get 'game-lobby', to: 'games#gameLobby'
   get 'guessing-round', to: 'games#guessingRound'
-  resources :codes, only: [:create]
+  resources :codes, only: [:create, :destroy]
   resources :code_users, only: [:create]
+  delete 'end-game', to: 'codes#destroy_all'
 
 end
