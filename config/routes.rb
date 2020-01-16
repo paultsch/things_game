@@ -6,10 +6,11 @@ Rails.application.routes.draw do
 
   resources :codes, only: [:create, :destroy]
   resources :code_users, only: [:create]
-  delete 'end-game', to: 'codes#destroy_all'
   resources :games do
     collection do
       put :update_guessingRound
+      put :update_guessingRoundMidRound
+      delete :end_game
     end
 
   end

@@ -51,7 +51,7 @@
   <p>After everyone has made their submission, the admin will click "guessing round" and this will show all the submissions.</p>
 
   <%= link_to "Guessing Round", guessing_round_path(game_code: @game_code, round: @round), class: "btn btn-success" %>
-  <%= link_to "End Game", end_game_path(game_code: @game_code), class: "btn btn-danger", method: :delete %>
+  <%= link_to "End Game", end_game_games_path(game_code: @game_code), class: "btn btn-danger", method: :delete %>
 <% end %>
 
 <% if current_user.player? %>
