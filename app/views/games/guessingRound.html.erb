@@ -1,20 +1,28 @@
 <h1>Guessing Round</h1>
 <p>This will for a form that displays submissions as tiles, but gives a check box for "guessed correctly", and a drop down menu that pulls names from players who are in the game. When the round is over, the admin clicks "next round" button which updates form/database and redirects screen to game lobby.</p>
-<div id="round-search-results">
+<%= form_tag update_guessingRound_games_path, method: :put %>
   <div class="row">
     <% @submissions.each do |submission| %>
+      <%= fields_for "submissions[]", submission do |f| %>
         <div class="well col-md-4">
           <p><%= submission.submission %></p>
-          <input type="checkbox">Done
-          <select>
-            <option></option>
-            <% @users.each do |user| %>
-              <option><%= user.username %></option>
-            <% end %>
-          </select>
+          <div class="form-group"
+            <%= f.label :guessed_correctly %>
+            <%= f.check_box :guessed_correctly %>
+          </div>
+          <div class="form-group"
+            <%= f.label :guesser_id %>
+            <%= f.collection_select( :guesser_id, @users, :user_id, :username, options = { include_blank: true, multiple: false }) %>
+            <%#= f.select_tag :guesser_id, options_from_collection_for_select(@users, "user_id", "user_id"), include_blank: true %>
+            <%#= f.text_field :guesser_id %>
+          </div>
         </div>
+      <% end %>
     <% end %>
   </div>
-</div>
+  <%= hidden_field_tag(:game_code, @game_code) %>
+  <%= hidden_field_tag(:round, @round) %>
+  <%= submit_tag "Next Round" %>
+
 
 <%= link_to "Back to Lobby", game_lobby_path(game_code: @game_code, round: @round), class: "btn btn-success" %>

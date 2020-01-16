@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200109005858) do
+ActiveRecord::Schema.define(version: 20200114030338) do
 
   create_table "code_users", force: :cascade do |t|
     t.integer "code_id"
@@ -39,11 +39,11 @@ ActiveRecord::Schema.define(version: 20200109005858) do
     t.integer "round"
     t.text "submission"
     t.integer "user_id"
-    t.integer "guesser"
     t.boolean "guessed_correctly"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "code"
+    t.integer "guesser_id"
+    t.integer "code_id"
     t.index ["user_id"], name: "index_submissions_on_user_id"
   end
 

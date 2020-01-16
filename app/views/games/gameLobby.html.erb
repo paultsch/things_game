@@ -21,17 +21,25 @@
     <tr>
       <th>Player</th>
       <th>Score</th>
-      <th>Order</th>
     </tr>
   </thead>
 
   <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= user.user.username %></td>
-        <td><%= user.score %></td>
-        <td>#</td>
-      </tr>
+    <% if @users %>
+      <% @users.each do |user| %>
+        <tr>
+          <!-- <td><%#= user.guesser.username %></td> -->
+          <td><%= user.user.username %></td>
+          <td><%= user.score %></td>
+        </tr>
+      <% end %>
+    <% else %>
+      <% @startUsers.each do |user| %>
+        <tr>
+          <td><%= user.user.username %></td>
+          <td>0</td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
