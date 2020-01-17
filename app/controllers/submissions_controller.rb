@@ -3,7 +3,10 @@ class SubmissionsController < ApplicationController
   def new
     @submission = Submission.new
     @game_code = params[:game_code]
+    game_code_object = Code.find_by_code(@game_code)
+    game_code_id = game_code_object.id
     @round = params[:round]
+    @thing = CodeThing.where(code_id: game_code_id, round: params[:round])
   end
 
   def create

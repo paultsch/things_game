@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200114030338) do
+ActiveRecord::Schema.define(version: 20200117180846) do
+
+  create_table "code_things", force: :cascade do |t|
+    t.integer "code_id"
+    t.integer "thing_id"
+    t.integer "round"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["code_id"], name: "index_code_things_on_code_id"
+    t.index ["thing_id"], name: "index_code_things_on_thing_id"
+  end
 
   create_table "code_users", force: :cascade do |t|
     t.integer "code_id"
@@ -45,6 +55,12 @@ ActiveRecord::Schema.define(version: 20200114030338) do
     t.integer "guesser_id"
     t.integer "code_id"
     t.index ["user_id"], name: "index_submissions_on_user_id"
+  end
+
+  create_table "things", force: :cascade do |t|
+    t.text "thing"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

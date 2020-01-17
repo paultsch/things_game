@@ -28,7 +28,6 @@
     <% if @users %>
       <% @users.each do |user| %>
         <tr>
-          <!-- <td><%#= user.guesser.username %></td> -->
           <td><%= user.user.username %></td>
           <td><%= user.score %></td>
         </tr>
@@ -50,7 +49,7 @@
 
   <p>After everyone has made their submission, the admin will click "guessing round" and this will show all the submissions.</p>
 
-  <%= link_to "Guessing Round", guessing_round_path(game_code: @game_code, round: @round), class: "btn btn-success" %>
+  <%= link_to "Select a Thing", code_things_path(game_code: @game_code, round: @round), class: "btn btn-success", method: :post %>
   <%= link_to "End Game", end_game_games_path(game_code: @game_code), class: "btn btn-danger", method: :delete %>
 <% end %>
 

@@ -1,4 +1,7 @@
-<h1>New submission</h1>
+<h1>Things...</h1>
+
+<h2><%= @thing.first.thing.thing %></h2>
+
 
 <%= form_for @submission do |f| %>
 
@@ -14,5 +17,3 @@
 <%= link_to "Back to Lobby", game_lobby_path(game_code: @game_code, round: @round), class: 'btn btn-success' %>
 
 <% end %>
-
-<p>need to work on the create action to have it submit round and submission to database and redirect user back to game lobby. Needs to submit current user id, round (passed via params), game_code (passwed via params). </p>

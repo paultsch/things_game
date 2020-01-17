@@ -1,0 +1,14 @@
+<h1>Things new table</h1>
+
+
+<%= form_for @thing do |f| %>
+<div class="form-group">
+  <%= f.label :thing %>
+  <%= f.text_area :thing, autofocus: true, class: 'form-control' %>
+</div>
+
+<div class="form-group">
+  <%= f.submit class: 'btn btn-primary' %>
+</div>
+
+<% end %>

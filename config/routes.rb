@@ -12,10 +12,14 @@ Rails.application.routes.draw do
       put :update_guessingRoundMidRound
       delete :end_game
     end
-
   end
+
+  get 'select-a-thing', to: 'games#selectAThing'
 
   get 'game-lobby', to: 'games#gameLobby'
   get 'guessing-round', to: 'games#guessingRound'
+
+  resources :code_things, only: [:create]
+  resources :things, only: [:new, :create, :index]
 
 end
