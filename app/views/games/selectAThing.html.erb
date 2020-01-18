@@ -3,3 +3,4 @@
 <h2><%= @thing.first.thing.thing %></h2>
 
 <%= link_to "Guessing Round", guessing_round_path(game_code: @game_code, round: @round, thing: @thing.first.thing_id), class: "btn btn-success" %>
+<%#= link_to "Select a new Thing", code_thing_path(:id), class: "btn btn-warning" %>

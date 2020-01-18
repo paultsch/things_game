@@ -2,7 +2,7 @@
 <h2>Still needs guessing</h2>
   <%= form_tag update_guessingRound_games_path, method: :put do %>
     <div class="row">
-      <%= @submissions.each do |submission| %>
+      <% @submissions.each do |submission| %>
         <%= fields_for "submissions[]", submission do |f| %>
           <div class="well col-md-4">
             <strong>Submission</strong><br>

@@ -18,9 +18,8 @@ class GamesController < ApplicationController
     game_code_id = game_code_object.id
     @users = CodeUser.find_by_sql "SELECT c.user_id, u.username FROM code_users c INNER JOIN users u ON c.user_id = u.id WHERE code_id = #{game_code_id}"
     @round = params[:round]
-    #@submissions = Submission.find_by_sql "SELECT * FROM submissions WHERE code_id = #{game_code_id} AND round = #{@round} AND guessed_correctly IS NOT TRUE"
-    @submissions = Submission.where(code_id: game_code_id, round: @round, guessed_correctly: [nil, false])
-
+    @sub = Submission.where(code_id: game_code_id, round: @round, guessed_correctly: [nil, false])
+    @submissions = @sub.order('RANDOM()')
     @submissionsDone = Submission.where(code_id: game_code_id, round: @round, guessed_correctly: true)
   end
 
