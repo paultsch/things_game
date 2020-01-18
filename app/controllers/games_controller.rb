@@ -16,25 +16,31 @@ class GamesController < ApplicationController
     @game_code = params[:game_code]
     game_code_object = Code.find_by_code(@game_code)
     game_code_id = game_code_object.id
+    @thing_id = params[:thing]
+    @thing = Thing.where(id: @thing_id)
     @users = CodeUser.find_by_sql "SELECT c.user_id, u.username FROM code_users c INNER JOIN users u ON c.user_id = u.id WHERE code_id = #{game_code_id}"
     @round = params[:round]
-    @sub = Submission.where(code_id: game_code_id, round: @round, guessed_correctly: [nil, false])
+    @sub = Submission.where(code_id: game_code_id, round: @round, guesser_id: nil)
     @submissions = @sub.order('RANDOM()')
-    @submissionsDone = Submission.where(code_id: game_code_id, round: @round, guessed_correctly: true)
+    @submissionsDone = Submission.find_by_sql "Select * FROM submissions WHERE code_id = #{game_code_id} AND round = #{@round} AND guesser_id is not null"
   end
+
+
 
   def update_guessingRound
     @game_code = params[:game_code]
     @round = params[:round]
+    @thing = params[:thing]
     Submission.update(params[:submissions].keys, params[:submissions].values)
-    redirect_to guessing_round_path(game_code: @game_code, round: @round)
+    redirect_to guessing_round_path(game_code: @game_code, round: @round, thing: @thing)
   end
 
   def update_guessingRoundMidRound
     @game_code = params[:game_code]
     @round = params[:round]
+    @thing = params[:thing]
     Submission.update(params[:submissionsDone].keys, params[:submissionsDone].values)
-    redirect_to guessing_round_path(game_code: @game_code, round: @round)
+    redirect_to guessing_round_path(game_code: @game_code, round: @round, thing: @thing)
   end
 
   def selectAThing
