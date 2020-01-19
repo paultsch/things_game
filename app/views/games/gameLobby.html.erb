@@ -1,20 +1,26 @@
-<div class="row">
-  <div class="col-md-6">
-    <h1>Game Lobby</h1>
+<% if current_user.admin? %>
+  <div class="jumbotron">
+    <h1>The Game of Things</h1>
+    <h2>things-game.herokuapp.com</h2>
     <h2>Game Code: <%= @game_code %></h2>
-    <h3>Just Finished Round: <%= params[:round] %>
-    <h3>Next Round: <%= @round %> </h3>
-    <h3>Current User: <%= current_user.username %></h3>
+    <hr class="my-4">
+    <%= link_to "Select a Thing", code_things_path(game_code: @game_code, round: @round), class: "btn btn-success", method: :post %>
+    <%= link_to "End Game", end_game_games_path(game_code: @game_code), class: "btn btn-danger", method: :delete %>
   </div>
-  <div class="col-md-6">
-    <% if current_user.player? %>
-      <%= link_to "Submit your Things", new_submission_path(game_code: @game_code, round: @round), class: "btn btn-success btn-lg vcenter" %>
-    <% end %>
-  </div>
-</div>
+<% end %>
 
-<h3>Players</h3>
-<p>Here is a user's table that displays all of the users and their current order, but also gives the admin the option to reorder the users field. This after this form submits, it redirects back to this game page. This page will also handle scoring. </p>
+<div class="jumbotron">
+  <h1>Game Lobby</h1>
+  <% if params[:round] == 0 %>
+    <h3>Just Finished Round: <%= params[:round] %>
+  <% end %>
+  <h3>Next Round: <%= @round %> </h3>
+  <h3>Current User: <%= current_user.username.titlecase %></h3>
+  <% if current_user.player? %>
+    <hr class="my-4">
+    <%= link_to "Submit your Things", new_submission_path(game_code: @game_code, round: @round), class: "btn btn-success btn-lg vcenter" %>
+  <% end %>
+</div>
 
 <table class="table table-striped">
   <thead>
@@ -28,7 +34,7 @@
     <% if @users %>
       <% @users.each do |user| %>
         <tr>
-          <td><%= user.user.username %></td>
+          <td><%= user.user.username.titlecase %></td>
           <td><%= user.score %></td>
         </tr>
       <% end %>
@@ -42,19 +48,3 @@
     <% end %>
   </tbody>
 </table>
-
-<% if current_user.admin? %>
-  <h3>Admin</h3>
-  <p>For now, players will grab a card from the table to figure out what everyone is writing about.  But eventually, we make this button say "Pick a Thing", which randomly selects a thing from the things table and displays it.  Could then also make a submission on this page for the player to submit the thing id and then the thing would display on the submissions page.</p>
-
-  <p>After everyone has made their submission, the admin will click "guessing round" and this will show all the submissions.</p>
-
-  <%= link_to "Select a Thing", code_things_path(game_code: @game_code, round: @round), class: "btn btn-success", method: :post %>
-  <%= link_to "End Game", end_game_games_path(game_code: @game_code), class: "btn btn-danger", method: :delete %>
-<% end %>
-
-<% if current_user.player? %>
-  <h3>Player</h3>
-
-  <%= link_to "Submit your Things", new_submission_path(game_code: @game_code, round: @round), class: "btn btn-success" %>
-<% end %>

@@ -1,21 +1,59 @@
 <h1>Guessing Round</h1>
 
-<h2>Things...</h2>
+<div class="row">
+  <div class="col-md-12">
+  </div>
+</div>
 
-<h2><%= @thing.first.thing %></h2>
 
-<h3>Still needs guessing</h3>
+<div class="jumbotron">
+  <%= link_to "End Round", game_lobby_path(game_code: @game_code, round: @round), class: "btn btn-success" %>
+  <hr class="my-4">
+  <h2>Things...</h2>
+  <h1 class="text-center"><%= @thing.first.thing %></h1>
+</div>
+
+<% if @sub.count > 0 %>
+
+  <h3>Unknown</h3>
   <%= form_tag update_guessingRound_games_path, method: :put do %>
     <div class="row">
       <% @submissions.each do |submission| %>
         <%= fields_for "submissions[]", submission do |f| %>
           <div class="well col-md-4">
-            <strong>Submission</strong><br>
-            <p><%= submission.submission %></p>
+            <h2>Submission</h2>
+            <h3><%= submission.submission %></h3>
             <!-- <div class="form-group"
               <%#= f.label :guessed_correctly %>
               <%#= f.check_box :guessed_correctly %>
             </div> -->
+            <div class="form-group"
+              <%= f.label :guesser_id%>
+              <%= f.collection_select( :guesser_id, @users, :user_id, :username, options = { include_blank: true, multiple: false }) %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <%= hidden_field_tag(:game_code, @game_code) %>
+    <%= hidden_field_tag(:round, @round) %>
+    <%= hidden_field_tag(:thing, @thing_id) %>
+    <%= submit_tag "Update" %>
+  <% end %>
+<% end %>
+
+<% if @submissionsDone.count > 0 %>
+
+  <h3>Known</h3>
+  <%= form_tag update_guessingRoundMidRound_games_path, method: :put do %>
+    <div class="row">
+      <% @submissionsDone.each do |submissionDone| %>
+        <%= fields_for "submissionsDone[]", submissionDone do |f| %>
+          <div class="well col-md-4">
+            <h2>Submission</h2>
+            <h3> <%= submissionDone.submission %></h3>
+            <h4>Who put the Thing:</h4>
+            <h5> <%= submissionDone.user.username %></h5>
             <div class="form-group"
               <%= f.label :guesser_id %>
               <%= f.collection_select( :guesser_id, @users, :user_id, :username, options = { include_blank: true, multiple: false }) %>
@@ -30,28 +68,4 @@
     <%= submit_tag "Update" %>
   <% end %>
 
-<h3>Guessed Correctly</h3>
-<%= form_tag update_guessingRoundMidRound_games_path, method: :put do %>
-  <div class="row">
-    <% @submissionsDone.each do |submissionDone| %>
-      <%= fields_for "submissionsDone[]", submissionDone do |f| %>
-        <div class="well col-md-4">
-          <strong>Submission:</strong><br>
-          <p> <%= submissionDone.submission %></p>
-          <strong>Person who put that answer:</strong><br>
-          <p> <%= submissionDone.user.username %></p>
-          <div class="form-group"
-            <%= f.label :guesser_id %>
-            <%= f.collection_select( :guesser_id, @users, :user_id, :username, options = { include_blank: true, multiple: false }) %>
-          </div>
-        </div>
-      <% end %>
-    <% end %>
-  </div>
-  <%= hidden_field_tag(:game_code, @game_code) %>
-  <%= hidden_field_tag(:round, @round) %>
-  <%= hidden_field_tag(:thing, @thing_id) %>
-  <%= submit_tag "Update" %>
 <% end %>
-<br>
-<%= link_to "End Round", game_lobby_path(game_code: @game_code, round: @round), class: "btn btn-success" %>
