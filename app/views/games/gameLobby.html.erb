@@ -30,21 +30,12 @@
     </tr>
   </thead>
 
-  <!-- <tbody>
-    <#% if @users %>
-      <#% @users.each do |user| %>
-        <tr>
-          <td><#%= user.user.username.titlecase %></td>
-          <td><#%= user.score %></td>
-        </tr>
-      <#% end %>
-    <#% else %>
-      <#% @startUsers.each do |user| %>
-        <tr>
-          <td><#%= user.user.username %></td>
-          <td>0</td>
-        </tr>
-      <#% end %>
-    <#% end %>
-  </tbody> -->
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.user.username.titlecase %></td>
+        <td><%= user.score %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>

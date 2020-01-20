@@ -6,15 +6,15 @@ class GamesController < ApplicationController
   def gameLobby
     @game_code = params[:game_code]
     game_code_object = Code.find_by_code(@game_code)
-    #if game_code_object
-    game_code_id = game_code_object.id
-      #@users = Submission.find_by_sql "SELECT c.user_id, COUNT(s.guesser_id) AS score FROM code_users c LEFT JOIN submissions s ON c.user_id = s.guesser_id WHERE c.code_id = #{game_code_id} GROUP BY c.code_id AND c.user_id "
-    @round = params[:round].to_i
-    @round = @round + 1
-  #  else
-    #  flash[:danger] = "Game code is no longer available"
-    #  redirect_to root_path
-  #  end
+    if game_code_object
+      game_code_id = game_code_object.id
+      @users = Submission.find_by_sql "SELECT c.user_id, COUNT(s.guesser_id) AS score FROM code_users c LEFT JOIN submissions s ON c.user_id = s.guesser_id WHERE c.code_id = #{game_code_id} GROUP BY c.user_id"
+      @round = params[:round].to_i
+      @round = @round + 1
+    else
+       flash[:danger] = "Game code is no longer available"
+       redirect_to root_path
+    end
   end
 
   def guessingRound
